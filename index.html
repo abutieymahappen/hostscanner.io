@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SNI Scanner</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: cursive;
+      background: #020617;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 60px;
+      transition: 0.3s;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 360px;
+      text-align: center;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 10px;
+      width: 90%;
+      max-width: 360px;
+      background: #0f172a;
+      padding: 12px 16px;
+      border-radius: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .menu-btn {
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .menu {
+      position: fixed;
+      top: 60px;
+      width: 90%;
+      max-width: 360px;
+      background: #f8fafc;
+      color: black;
+      border-radius: 16px;
+      display: none;
+      overflow: hidden;
+      z-index: 30;
+    }
+
+    .menu div {
+      padding: 15px;
+      border-bottom: 1px solid #e5e7eb;
+      cursor: pointer;
+    }
+
+    .top-text {
+      color: #22c55e;
+      font-size: 16px;
+      letter-spacing: 3px;
+      margin-top: 60px;
+      margin-bottom: 10px;
+    }
+
+    .card {
+      background: #0f172a;
+      padding: 18px;
+      border-radius: 16px;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 25px;
+      border: none;
+      background: #020617;
+      color: white;
+      outline: none;
+    }
+
+    .scan-btn {
+      width: 100%;
+      margin-top: 10px;
+      padding: 14px;
+      border-radius: 25px;
+      border: none;
+      background: #34d;
+      color: black;
+      cursor: pointer;
+    }
+
+    .progress {
+      width: 100%;
+      height: 5px;
+      background: #020617;
+      margin-top: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #bar {
+      width: 0%;
+      height: 100%;
+      background: #22c55e;
+      transition: 0.3s;
+    }
+
+    .result {
+      margin-top: 12px;
+      text-align: left;
+    }
+
+    .page {
+      display: none;
+      width: 90%;
+      max-width: 360px;
+      padding-top: 70px;
+    }
+
+    .box {
+      background: #0f172a;
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    .back {
+      cursor: pointer;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+
+    select, button.reset {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 10px;
+      border: none;
+    }
+
+    .reset {
+      background: red;
+      color: white;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="topbar">
+  <div>ᴘʀɪᴍᴇ_ɪᴛᴀᴄʜɪɪ ʜᴏsᴛ sᴄᴀɴ𓃶</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
+</div>
+
+<div class="menu" id="menu">
+  <div onclick="openPage('settings')">⚙️ Settings</div>
+  <div onclick="openPage('dev')">💻 Developers</div>
+  <div onclick="openPage('about')">ℹ️ About</div>
+  <div onclick="openPage('license')">📄 License</div>
+  <div onclick="openPage('Updates')">🛎️ Updates</div>
+</div>
+
+<!-- MAIN -->
+<div id="main" class="container">
+  <div class="top-text">NETWORK SCANNING</div>
+
+  <h2>Simple host scanning</h2>
+
+  <div class="card" id="card">
+    <input id="host" placeholder="Enter host">
+    <button class="scan-btn" onclick="scan()">Scan →</button>
+
+    <div class="progress"><div id="bar"></div></div>
+    <div class="result" id="result"></div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div id="settings" class="page">
+  <div class="back" onclick="goBack()">← Back</div>
+  <div class="box">
+    <h3>Settings</h3>
+
+    <p>Background</p>
+    <select onchange="changeBg(this.value)">
+      <option value="#020617">Dark</option>
+      <option value="#000000">Black</option>
+      <option value="#1e293b">Blue</option>
+    </select>
+
+    <p>Font</p>
+    <select onchange="changeFont(this.value)">
+      <option value="cursive">Cursive</option>
+      <option value="Arial">Default</option>
+      <option value="monospace">Mono</option>
+    </select>
+
+    <p>Text Color</p>
+    <select onchange="changeText(this.value)">
+      <option value="white">White</option>
+      <option value="#22c55e">Green</option>
+      <option value="#38bdf8">Blue</option>
+    </select>
+
+    <p>Card Style</p>
+    <select onchange="changeCard(this.value)">
+      <option value="16px">Rounded</option>
+      <option value="5px">Sharp</option>
+    </select>
+
+    <button class="reset" onclick="resetSettings()">Reset</button>
+  </div>
+</div>
+
+<!-- DEV -->
+<div id="dev" class="page">
+  <div class="back" onclick="goBack()">← Back</div>
+  <div class="box">
+    <h3>Developers</h3>
+    <p>Name: ꯭꯭ᴘʀɪᴍᴇ⃪𓆪 乂ɪᴛᴀᴄʜɪɪ</p>
+  <p>Name:ᴀʙᴜᴛɪɪᴇʏᴍᴀʜᴀᴘᴘᴇɴ</p>
+  
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="page">
+  <div class="back" onclick="goBack()">← Back</div>
+  <div class="box">
+    <h3>About</h3>
+    <p>Scan hosts, detect status, and check performance instantly.</p>
+  </div>
+  <p>Version: 1.2</p>
+</div>
+
+<!-- LICENSE -->
+<div id="license" class="page">
+  <div class="back" onclick="goBack()">← Back</div>
+  <div class="box">
+    <h3>License</h3>
+    <p>Free for personal use.</p>
+  </div>
+</div>
+<!-- UPDATES -->
+<div id="Updates" class="page">
+  <div class="back" onclick="goBack()">← Back</div>
+  <div class="box">
+    <h3>Updates</h3>
+    <p>Theres no update yet.</p>
+    <p>Version 1.2</p>
+  </div>
+
+<script>
+function toggleMenu(){
+  let m = document.getElementById("menu");
+  m.style.display = (m.style.display === "block") ? "none" : "block";
+}
+
+function closeMenu(){
+  document.getElementById("menu").style.display = "none";
+}
+
+document.addEventListener("click", function(e){
+  let menu = document.getElementById("menu");
+  if(!e.target.closest(".menu") && !e.target.closest(".menu-btn")){
+    menu.style.display = "none";
+  }
+});
+
+function openPage(id){
+  document.getElementById("main").style.display = "none";
+  document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+  document.getElementById(id).style.display = "block";
+  closeMenu();
+}
+
+function goBack(){
+  document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+  document.getElementById("main").style.display = "block";
+}
+
+function changeBg(c){
+  document.body.style.background = c;
+  localStorage.setItem("bg", c);
+}
+
+function changeFont(f){
+  document.body.style.fontFamily = f;
+  localStorage.setItem("font", f);
+}
+
+function changeText(c){
+  document.body.style.color = c;
+  localStorage.setItem("text", c);
+}
+
+function changeCard(r){
+  document.getElementById("card").style.borderRadius = r;
+  localStorage.setItem("card", r);
+}
+
+function resetSettings(){
+  localStorage.clear();
+  location.reload();
+}
+
+window.onload = () => {
+  let bg = localStorage.getItem("bg");
+  let font = localStorage.getItem("font");
+  let text = localStorage.getItem("text");
+  let card = localStorage.getItem("card");
+
+  if(bg) document.body.style.background = bg;
+  if(font) document.body.style.fontFamily = font;
+  if(text) document.body.style.color = text;
+  if(card) document.getElementById("card").style.borderRadius = card;
+};
+
+function setBar(p){
+  document.getElementById("bar").style.width = p + "%";
+}
+
+async function scan(){
+  let input = document.getElementById("host").value.trim();
+  let result = document.getElementById("result");
+
+  document.getElementById("bar").style.width = "0%";
+  result.innerHTML = "";
+
+  if(!input){
+    result.innerHTML = "⚠️ Enter a host first";
+    return;
+  }
+
+  let host;
+  try {
+    host = new URL(input).hostname;
+  } catch {
+    host = input;
+  }
+
+  setBar(40);
+  result.innerHTML = "Scanning...";
+
+  try{
+    let dns = await fetch("https://dns.google/resolve?name=" + host);
+    let data = await dns.json();
+
+    let ip = data.Answer ? data.Answer[0].data : "Unknown";
+    let status = ip !== "Unknown" ? "🟢 Online (DNS found)" : "🔴 Unknown";
+
+    setBar(100);
+
+    result.innerHTML = `
+      <div><b>Host:</b> ${host}</div>
+      <div><b>IP:</b> ${ip}</div>
+      <div><b>Status:</b> ${status}</div>
+    `;
+  } catch {
+    setBar(0);
+    result.innerHTML = "Scan failed";
+  }
+}
+</script>
+
+
+
+</body>
+</html>
