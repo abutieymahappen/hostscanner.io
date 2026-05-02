@@ -3,153 +3,165 @@
 <head>
   <title>SNI Scanner</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: cursive;
-      background: #020617;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding-top: 60px;
-      transition: 0.3s;
-    }
+<style>
+  body {
+    margin: 0;
+    font-family: cursive;
+    background: #020617;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 70px;
+    transition: 0.3s;
+    font-weight: bold;
+  }
 
-    .container {
-      width: 90%;
-      max-width: 360px;
-      text-align: center;
-    }
+  /* BIGGER LAYOUT */
+  .container {
+    width: 95%;
+    max-width: 600px;
+    text-align: center;
+  }
 
-    .topbar {
-      position: fixed;
-      top: 10px;
-      width: 90%;
-      max-width: 360px;
-      background: #0f172a;
-      padding: 12px 16px;
-      border-radius: 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 20;
-    }
+  .topbar {
+    position: fixed;
+    top: 10px;
+    width: 95%;
+    max-width: 600px;
+    background: #0f172a;
+    padding: 14px 18px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+  }
 
-    .menu-btn {
-      font-size: 20px;
-      cursor: pointer;
-    }
+  .menu-btn {
+    font-size: 22px;
+    cursor: pointer;
+  }
 
-    .menu {
-      position: fixed;
-      top: 60px;
-      width: 90%;
-      max-width: 360px;
-      background: #f8fafc;
-      color: black;
-      border-radius: 16px;
-      display: none;
-      overflow: hidden;
-      z-index: 30;
-    }
+  .menu {
+    position: fixed;
+    top: 60px;
+    width: 95%;
+    max-width: 600px;
+    background: #f8fafc;
+    color: black;
+    border-radius: 16px;
+    display: none;
+    overflow: hidden;
+    z-index: 30;
+  }
 
-    .menu div {
-      padding: 15px;
-      border-bottom: 1px solid #e5e7eb;
-      cursor: pointer;
-    }
+  .menu div {
+    padding: 15px;
+    border-bottom: 1px solid #e5e7eb;
+    cursor: pointer;
+  }
 
-    .top-text {
-      color: #22c55e;
-      font-size: 16px;
-      letter-spacing: 3px;
-      margin-top: 60px;
-      margin-bottom: 10px;
-    }
+  .top-text {
+    color: #22c55e;
+    font-size: 18px;
+    letter-spacing: 3px;
+    margin-top: 60px;
+    margin-bottom: 15px;
+  }
 
-    .card {
-      background: #0f172a;
-      padding: 18px;
-      border-radius: 16px;
-      margin-top: 10px;
-    }
+  h2 {
+    font-size: 24px;
+  }
 
-    input {
-      width: 100%;
-      padding: 14px;
-      border-radius: 25px;
-      border: none;
-      background: #020617;
-      color: white;
-      outline: none;
-    }
+  /* BIGGER CARD */
+  .card {
+    background: #0f172a;
+    padding: 25px;
+    border-radius: 18px;
+    margin-top: 15px;
+  }
 
-    .scan-btn {
-      width: 100%;
-      margin-top: 10px;
-      padding: 14px;
-      border-radius: 25px;
-      border: none;
-      background: #34d;
-      color: black;
-      cursor: pointer;
-    }
+  input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 25px;
+    border: none;
+    background: #020617;
+    color: white;
+    outline: none;
+    font-weight: bold;
+  }
 
-    .progress {
-      width: 100%;
-      height: 5px;
-      background: #020617;
-      margin-top: 12px;
-      border-radius: 10px;
-      overflow: hidden;
-    }
+  /* FIXED BUTTON COLOR */
+  .scan-btn {
+    width: 100%;
+    margin-top: 12px;
+    padding: 16px;
+    border-radius: 25px;
+    border: none;
+    background: #34d399;
+    color: black;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+  }
 
-    #bar {
-      width: 0%;
-      height: 100%;
-      background: #22c55e;
-      transition: 0.3s;
-    }
+  .progress {
+    width: 100%;
+    height: 6px;
+    background: #020617;
+    margin-top: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+  }
 
-    .result {
-      margin-top: 12px;
-      text-align: left;
-    }
+  #bar {
+    width: 0%;
+    height: 100%;
+    background: #22c55e;
+    transition: 0.3s;
+  }
 
-    .page {
-      display: none;
-      width: 90%;
-      max-width: 360px;
-      padding-top: 70px;
-    }
+  .result {
+    margin-top: 15px;
+    text-align: left;
+    font-size: 14px;
+  }
 
-    .box {
-      background: #0f172a;
-      padding: 20px;
-      border-radius: 16px;
-    }
+  .page {
+    display: none;
+    width: 95%;
+    max-width: 600px;
+    padding-top: 70px;
+  }
 
-    .back {
-      cursor: pointer;
-      margin-bottom: 15px;
-      display: inline-block;
-    }
+  .box {
+    background: #0f172a;
+    padding: 25px;
+    border-radius: 18px;
+  }
 
-    select, button.reset {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      border-radius: 10px;
-      border: none;
-    }
+  .back {
+    cursor: pointer;
+    margin-bottom: 15px;
+    display: inline-block;
+  }
 
-    .reset {
-      background: red;
-      color: white;
-      margin-top: 15px;
-    }
-  </style>
+  select, button.reset {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 10px;
+    border: none;
+  }
+
+  .reset {
+    background: red;
+    color: white;
+    margin-top: 15px;
+  }
+</style>
 </head>
 
 <body>
